@@ -1,21 +1,25 @@
-export default class Map<T extends (string | number), V> {
-    
+export default class Map<T extends string | number, V> {
+  private map: Partial<{ [key in T]: V }>;
 
-    
+  constructor() {
+    this.map = {};
+  }
 
-    constructor() {
-    }
+  get(key: T): V | undefined {
+    return this.map[key];
+  }
 
-    get(key: T): V | undefined {
+  set(key: T, value: V): void {
+    this.map[key] = value;
+  }
 
-}
-    set(key: T, value: V): void {
+  delete(key: T): V | undefined {
+    const value = this.map[key];
+    delete this.map[key];
+    return value;
+  }
 
-}
-    delete(key: T): V | undefined {
-
-}
-    size(): number {
-
-}
+  size(): number {
+    return Object.keys(this.map).length;
+  }
 }
